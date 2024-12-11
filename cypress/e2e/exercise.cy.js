@@ -1,18 +1,23 @@
+import Home from "./pages/home";
+import Products from "./pages/products";
+
 describe('Automation_Excercice', () => {
     beforeEach(()=> {
         cy.visit('/');
     });
     
     it('Should be able to add to cart', () =>{
-        cy.get('.shop-menu > .nav > :nth-child(2) > a').click();
-        cy.get(':nth-child(5) > .product-image-wrapper > .choose > .nav > li > a').click();
-        cy.get('.product-information').should('exist');
+        const home = new Home();
+        home.selectProducts();
 
-        const quantity = Math.floor(Math.random() * 20) + 1 ;
+        const products = new Products();
+        products.selectProduct3();
+        products.product3Information.should('exist');
 
-        cy.get('#quantity').clear().type(quantity);
-        cy.get(':nth-child(5) > .btn').click();
-        cy.get('u').click();
+        products.setRandomQuantity();
+        products.selectAddToCart()
+        products.selectPopupViewCart();
+        
         cy.get('.col-sm-6 > .btn').click();
 
         cy.get('.modal-body > :nth-child(2) > a > u').click();
