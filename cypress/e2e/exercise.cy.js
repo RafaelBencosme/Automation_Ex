@@ -1,47 +1,44 @@
-import Home from "./pages/home";
-import Products from "./pages/products";
+import TopNavigation from "./Components/TopNavigation";
+import Products from "./Pages/Products";
+import Cart from "./pages/cart";
+import Signup from "./pages/signup";
+import Checkout from "./Pages/Checkout";
+import Payment from "./pages/payment";
 
-describe('Automation_Excercice', () => {
-    beforeEach(()=> {
-        cy.visit('/');
-    });
-    
-    it('Should be able to add to cart', () =>{
-        const home = new Home();
-        home.selectProducts();
+describe("Automation_Excercice", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
 
-        const products = new Products();
-        products.selectProduct3();
-        products.product3Information.should('exist');
+  it("Should be able to add to cart", () => {
+    const topNav = new TopNavigation();
+    topNav.selectProducts();
 
-        products.setRandomQuantity();
-        products.selectAddToCart()
-        products.selectPopupViewCart();
-        
-        cy.get('.col-sm-6 > .btn').click();
+    const products = new Products();
+    products.selectProduct3();
+    products.product3Information.should("exist");
 
-        cy.get('.modal-body > :nth-child(2) > a > u').click();
+    products.setRandomQuantity();
+    products.selectAddToCart();
+    products.selectPopupViewCart();
 
-        cy.get('[data-qa="login-email"]').type('faker@fakemail.com');
-        cy.get('[data-qa="login-password"]').type('fakepassword');
-        cy.get('[data-qa="login-button"]').click();
+    const cart = new Cart();
+    cart.selectProceedToCheckout();
+    cart.selectModalLoginRegister();
 
-        cy.get('.shop-menu > .nav > :nth-child(3) > a').click();
-        cy.get('.col-sm-6 > .btn').click();
-        cy.get(':nth-child(7) > .btn').click();
+    const signup = new Signup();
+    signup.login("faker@fakemail.com", "fakepassword");
 
-        cy.get('[data-qa="name-on-card"]').type('fake name');
-        cy.get('[data-qa="card-number"]').type('fake card');
-        cy.get('[data-qa="cvc"]').type('cvc');
-        cy.get('[data-qa="expiry-month"]').type('exp');
-        cy.get('[data-qa="expiry-year"]').type('year');
-        cy.get('[data-qa="pay-button"]').click();
+    topNav.selectCart();
+    cart.selectProceedToCheckout();
 
-        cy.get('[data-qa="order-placed"] > b').should('exist');
+    const checkout = new Checkout();
+    checkout.selectPlaceOrder();
 
-        cy.get('.nav > :nth-child(4) > a').click();
-
-        cy.get('.login-form > h2').should('exist');
-
-        }); 
-    });
+    const payment = new Payment();
+    payment.fillPaymentMethod("fake name", "fake card", "cvc", "month", "year");
+    checkout.orderPlaced.should("exist");
+    topNav.selectLogout();
+    signup.loginTitle.should("exist");
+  });
+});
