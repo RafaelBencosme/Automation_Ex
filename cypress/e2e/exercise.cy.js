@@ -6,16 +6,15 @@ import Payment from "./pages/payment";
 import Signup from "./pages/signup";
 
 describe("Automation_Exercise", () => {
-  let topNav, products, cart, signUp, checkout, payment;
+  const topNav = new TopNavigation();
+  const products =new Products();
+  const cart =  new Cart();
+  const signUp = new Signup();
+  const checkout = new Checkout();
+  const payment = new Payment();
 
   beforeEach(() => {
     cy.visit("/");
-    topNav = new TopNavigation();
-    products = new Products();
-    cart = new Cart();
-    checkout = new Checkout();
-    payment = new Payment();
-    signUp = new Signup();
   });
 
   describe("Complete Purchase", () => {
