@@ -63,9 +63,8 @@ describe("Automation_Exercise", () => {
       cart.selectProceedToCheckout();
       cart.selectModalLoginRegister();
 
-      const signup = new Signup();
-      signup.register();
-      signup.fillNewUserForm();
+      signUp.register();
+      signUp.fillNewUserForm();
       
       topNav.selectCart();
       cart.selectProceedToCheckout();
