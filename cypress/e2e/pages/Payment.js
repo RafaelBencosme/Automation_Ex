@@ -5,6 +5,9 @@ class Payment {
         cy.get('[data-qa="cvc"]').type(cvc);
         cy.get('[data-qa="expiry-month"]').type(expirymMonth);
         cy.get('[data-qa="expiry-year"]').type(expiryYear);
+    }
+    
+    selectPay() {
         cy.get('[data-qa="pay-button"]').click();
     }
 }
