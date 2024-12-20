@@ -39,19 +39,14 @@ describe("Automation_Exercise", () => {
 
       checkout.selectPlaceOrder();
 
-      const randomNameOnCard = faker.person.fullName();
-      const randomCardNumber = faker.finance.creditCardCVV();
-      const randomCVC = faker.finance.creditCardCVV();
-      const expirationMonth = faker.date.month();
       const randomYear = faker.date.future(5);
-      const expirationYear = randomYear.getFullYear();
-
+      
       payment.fillPaymentMethod(
-        randomNameOnCard,
-        randomCardNumber,
-        randomCVC,
-        expirationMonth,
-        expirationYear
+        faker.person.fullName(),
+        faker.finance.creditCardCVV(),
+        faker.finance.creditCardCVV(),
+        faker.date.month(),
+        randomYear.getFullYear()
       );
       payment.selectPay();
 
@@ -73,36 +68,24 @@ describe("Automation_Exercise", () => {
       cart.selectProceedToCheckout();
       cart.selectModalLoginRegister();
 
-      const randomName = faker.person.fullName();
-      const randomEmail = faker.internet.email();
-      signUp.register(randomName, randomEmail);
-
-      const randomPassword = faker.internet.password();
-      const day = faker.number.int({ min: 1, max: 28 }).toString();
-      const month = faker.date.month();
-      const year = faker.number.int({ min: 1950, max: 2025 }).toString();
-      const randomFirstName = faker.person.firstName();
-      const randomLastName = faker.person.lastName();
-      const randomCompany = faker.person.fullName();
-      const randomAddress = faker.location.streetAddress();
-      const randomState = faker.location.state();
-      const randomCity = faker.location.city();
-      const randomZip = faker.location.zipCode();
-      const randomMobile = faker.phone.number("1+###-###-####");
+      signUp.register(
+        faker.person.fullName(), 
+        faker.internet.email()
+      );
 
       signUp.fillNewUserForm(
-        randomPassword,
-        day,
-        month,
-        year,
-        randomFirstName,
-        randomLastName,
-        randomCompany,
-        randomAddress,
-        randomState,
-        randomCity,
-        randomZip,
-        randomMobile
+        faker.internet.password(),
+        faker.number.int({ min: 1, max: 28 }).toString(),
+        faker.date.month(),
+        faker.number.int({ min: 1950, max: 2025 }).toString(),
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.person.fullName(),
+        faker.location.streetAddress(),
+        faker.location.state(),
+        faker.location.city(),
+        faker.location.zipCode(),
+        faker.phone.number("1+###-###-####")
       );
 
       topNav.selectCart();
@@ -110,19 +93,14 @@ describe("Automation_Exercise", () => {
 
       checkout.selectPlaceOrder();
 
-      const randomNameOnCard = faker.person.fullName();
-      const randomCardNumber = faker.finance.creditCardCVV();
-      const randomCVC = faker.finance.creditCardCVV();
-      const expirationMonth = faker.date.month();
       const randomYear = faker.date.future(5);
-      const expirationYear = randomYear.getFullYear();
 
       payment.fillPaymentMethod(
-        randomNameOnCard,
-        randomCardNumber,
-        randomCVC,
-        expirationMonth,
-        expirationYear
+        faker.person.fullName(),
+        faker.finance.creditCardNumber(),
+        faker.finance.creditCardCVV(),
+        faker.date.month(),
+        randomYear.getFullYear()
       );
       payment.selectPay();
 
